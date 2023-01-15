@@ -102,12 +102,12 @@ local misc = main:list(Translate("Misc"))
 --===============--
 
     local update_available
-    async_http.init("raw.githubusercontent.com","/akat0zi/mehScript/main/version",function(output)
+    async_http.init("raw.githubusercontent.com","/NyCreamZ/test2/main/version",function(output)
         if tonumber(version) < tonumber(output) then
             update_available = true
             Notify(Translate("Version").." "..string.gsub(output,"\n","",1).." "..Translate("available.\nPress Update to get it."))
             update_button = menu.action(menu.my_root(),Translate("Update to").." "..output,{},"",function()
-                async_http.init('raw.githubusercontent.com','/akat0zi/mehScript/main/mehScript.lua',function(a)
+                async_http.init('raw.githubusercontent.com','/NyCreamZ/test2/main/test2.lua',function(a)
                     if select(2,load(a)) then
                         Notify(Translate("Script failed to download. Please try again later. If this continues to happen then manually update via github."))
                         return
