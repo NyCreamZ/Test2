@@ -3,7 +3,7 @@ local scriptStartTime = util.current_time_millis()
 local version = "0.1"
 local Tree_V = 43
 local name_script = "Test2"
-
+--[[
 --===============--
 -- Auto-Updater Lib Install
 --===============--
@@ -73,7 +73,7 @@ local name_script = "Test2"
 --===============--
 -- FIN Auto-Updater Lib Install
 --===============--
-
+]]
 --===============--
 -- Fichier
 --===============--
@@ -187,6 +187,7 @@ local name_script = "Test2"
     else
         Translations = require(relative_languagesDir .. '\\' .. selected_language:gsub('.lua', ''))
     end
+
 --===============--
 -- COMPTEUR D'UTilisation
 --===============--
@@ -227,7 +228,7 @@ async_http.dispatch()
                     "Self>Glued To Seats",
                     "Self>Lock Wanted Level",
                     "Self>Infinite Stamina",
-                    "Soi>Appearance>No Blood",
+                    "Self>Appearance>No Blood",
                 },
             }
 
