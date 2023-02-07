@@ -1,8 +1,8 @@
 util.keep_running()--ceci fait que le script ne s'arrête pas après avoir fait son travail
 local scriptStartTime = util.current_time_millis()
-local version = "0.1"
+local SCRIPT_VERSION = "0.1"
 local Tree_V = 43
-local name_script = "Test2"
+
 --[[
 --===============--
 -- Auto-Updater Lib Install
@@ -38,24 +38,24 @@ local name_script = "Test2"
 
     --- Auto-Update
     local auto_update_config = {
-        source_url="https://raw.githubusercontent.com/NyCreamZ/"..name_script.."/main/"..name_script..".lua",
+        source_url="https://raw.githubusercontent.com/NyCreamZ/"..SCRIPT_NAME.."/main/"..SCRIPT_NAME..".lua",
         script_relpath=SCRIPT_RELPATH,
         --silent_updates=true,
         dependencies={
             {
                 name="functions",
-                source_url="https://raw.githubusercontent.com/NyCreamZ/"..name_script.."/main/lib/"..name_script.."/functions.lua",
-                script_relpath="lib/"..name_script.."/functions.lua",
+                source_url="https://raw.githubusercontent.com/NyCreamZ/"..SCRIPT_NAME.."/main/lib/"..SCRIPT_NAME.."/functions.lua",
+                script_relpath="lib/"..SCRIPT_NAME.."/functions.lua",
             },
             {
                 name="weapons",
-                source_url="https://raw.githubusercontent.com/NyCreamZ/"..name_script.."/main/lib/"..name_script.."/weapons.lua",
-                script_relpath="lib/"..name_script.."/weapons.lua",
+                source_url="https://raw.githubusercontent.com/NyCreamZ/"..SCRIPT_NAME.."/main/lib/"..SCRIPT_NAME.."/weapons.lua",
+                script_relpath="lib/"..SCRIPT_NAME.."/weapons.lua",
             },
             {
                 name="vehicles",
-                source_url="https://raw.githubusercontent.com/NyCreamZ/"..name_script.."/main/lib/"..name_script.."/vehicles.lua",
-                script_relpath="lib/"..name_script.."/vehicles.lua",
+                source_url="https://raw.githubusercontent.com/NyCreamZ/"..SCRIPT_NAME.."/main/lib/"..SCRIPT_NAME.."/vehicles.lua",
+                script_relpath="lib/"..SCRIPT_NAME.."/vehicles.lua",
             },
         }
     }
@@ -63,8 +63,8 @@ local name_script = "Test2"
     for _, language in pairs(languages) do
         local language_config = {
             name=language,
-            source_url="https://raw.githubusercontent.com/NyCreamZ/"..name_script.."/main/lib/"..name_script.."/Languages/"..language..".lua",
-            script_relpath="lib/"..name_script.."/Languages/"..language..".lua",
+            source_url="https://raw.githubusercontent.com/NyCreamZ/"..SCRIPT_NAME.."/main/lib/"..SCRIPT_NAME.."/Languages/"..language..".lua",
+            script_relpath="lib/"..SCRIPT_NAME.."/Languages/"..language..".lua",
         }
         table.insert(auto_update_config.dependencies, language_config)
     end
@@ -79,14 +79,14 @@ local name_script = "Test2"
 --===============--
     local required <const> = {
     	"lib/natives-1663599433.lua",
-    	"lib/"..name_script.."/functions.lua",
-    	"lib/"..name_script.."/vehicles.lua",
-    	"lib/"..name_script.."/weapons.lua",
+    	"lib/"..SCRIPT_NAME.."/functions.lua",
+    	"lib/"..SCRIPT_NAME.."/vehicles.lua",
+    	"lib/"..SCRIPT_NAME.."/weapons.lua",
     }
     local scriptdir <const> = filesystem.scripts_dir()
-    local libDir <const> = scriptdir .. "\\lib\\"..name_script.."\\"
+    local libDir <const> = scriptdir .. "\\lib\\"..SCRIPT_NAME.."\\"
     local languagesDir <const> = libDir .. "\\Languages\\"
-    local relative_languagesDir <const> = "./lib/"..name_script.."/Languages/"
+    local relative_languagesDir <const> = "./lib/"..SCRIPT_NAME.."/Languages/"
 
     for _, file in ipairs(required) do
     	assert(filesystem.exists(scriptdir .. file), "required file not found: " .. file)
@@ -153,7 +153,7 @@ local name_script = "Test2"
 
     if not table.contains(languageDir_files, 'english.lua') then
         need_default_language = true
-        async_http.init('raw.githubusercontent.com', 'NyCreamZ/'..name_script..'/main/lib/'..name_script..'/Languages/english.lua', function(data)
+        async_http.init('raw.githubusercontent.com', 'NyCreamZ/'..SCRIPT_NAME..'/main/lib/'..SCRIPT_NAME..'/Languages/english.lua', function(data)
             local file = io.open(translations_dir .. "/english.lua",'w')
             file:write(data)
             file:close()
@@ -324,7 +324,7 @@ async_http.dispatch()
     local anti_vehicles_options = {}
     anti_vehicles_options["remove"] = false
     anti_vehicles_options["notif"] = true
-    local anti_vehicles_file = scriptdir.."lib/"..name_script.."/anti_vehicles.json"
+    local anti_vehicles_file = scriptdir.."lib/"..SCRIPT_NAME.."/anti_vehicles.json"
     if not filesystem.exists(anti_vehicles_file) then
         local filehandle = io.open(anti_vehicles_file, "w")
         if filehandle then
@@ -1444,7 +1444,7 @@ end)
                 notification:help("format0" .. ".\n" .. "format1" .. '.', HudColour.red)
             end)
             testnotif_root:toggle_loop("normal",{},"", function ()
-                --notification:normal(name_script.." ~q~est ~u~le ~o~meilleur script!")
+                --notification:normal(SCRIPT_NAME.." ~q~est ~u~le ~o~meilleur script!")
                 notification.draw_debug_text("un petit %s du script", "test")
             end)
             testnotif_root:action("stand",{},"", function ()
@@ -1645,4 +1645,4 @@ end)
 -- FIN Main
 --===============--
 
-util.log(name_script.." loaded in %d millis", util.current_time_millis() - scriptStartTime)
+util.log(SCRIPT_NAME.." loaded in %d millis", util.current_time_millis() - scriptStartTime)
